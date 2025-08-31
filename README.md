@@ -1,4 +1,4 @@
-# `blognd`:
+# `blognd`
 Logan Dapp's (soon-to-be) Blog Website
 
 ----
