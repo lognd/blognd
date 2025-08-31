@@ -10,8 +10,8 @@ import type {
 } from "./text_interface.ts";
 
 export class TextBuffer implements TextInterface {
-    private grid: CharGrid;
-    static readonly MAX_ASPECT_RATIO: number = 2.0;
+    private readonly grid: CharGrid;
+    // static readonly MAX_ASPECT_RATIO: number = 2.0;
 
     constructor(args: {rowCount: number, colCount: number}) {
         this.grid = Array.from({ length: args.rowCount }, () =>
