@@ -5,15 +5,13 @@ import type {
     CharRow,
     CharStyle,
     CharText,
-    TextView,
     TextInterface,
     TextSetStatus
 } from "./text_interface.ts";
-import {isBlank} from "./special_characters.ts"
 
 export class TextBuffer implements TextInterface {
-    private readonly grid: CharGrid;
-    static readonly MAX_ASPECT_RATIO: number = 5.0;
+    private grid: CharGrid;
+    static readonly MAX_ASPECT_RATIO: number = 2.0;
 
     constructor(args: {rowCount: number, colCount: number}) {
         this.grid = Array.from({ length: args.rowCount }, () =>
@@ -26,9 +24,9 @@ export class TextBuffer implements TextInterface {
             args.col < 0 || args.col >= this.getColCount();
     }
 
-    private isNull(): boolean {
+    /*private isNull(): boolean {
         return this.isOutOfBounds({row: 0, col: 0});
-    }
+    }*/
 
     fill(args: {char: Char | CharText}): void {
         const c: Char = (typeof args.char === "string") ? {char: args.char} : args.char;
@@ -78,7 +76,7 @@ export class TextBuffer implements TextInterface {
         return this.grid.length;
     }
 
-    setAspect(args: { width: number; height: number, minRowCount?: number, minColCount?: number }): void {
+    /*private getWindow(): TextView {
         const text_view: TextView = {
             upper: 0,
             lower: this.getRowCount(),
@@ -92,6 +90,12 @@ export class TextBuffer implements TextInterface {
             while (isBlank({charArr: this.getCol({col: text_view.right - 1})!})) text_view.right--;
         }
 
+        return text_view;
+    }
+
+    setAspect(args: { width: number; height: number, minRowCount?: number, minColCount?: number }): void {
+        const text_view = this.getWindow();
+
         const width: number = args.minColCount ? Math.max(Math.abs(text_view.right - text_view.left), args.minColCount) : text_view.right - text_view.left;
         const height: number = args.minRowCount ? Math.max(Math.abs(text_view.lower - text_view.upper), args.minRowCount) : text_view.lower - text_view.upper;
         const aspect_ratio: number = Math.min(Math.max(Math.abs(args.width / args.height), 1.0 / TextBuffer.MAX_ASPECT_RATIO), TextBuffer.MAX_ASPECT_RATIO);
@@ -100,8 +104,11 @@ export class TextBuffer implements TextInterface {
         const new_height: number = Math.max(Math.round(new_width > width ? height : width / aspect_ratio), 1);
         new_width = Math.max(new_width > width ? width / aspect_ratio : new_width, 1);
 
-
+        this.grid = Array.from({ length: new_height }, () =>
+            Array.from({ length: new_width }, () => ({ char: " " as CharText}))
+        );
     }
+    */
 
     setChar(args: { row: number; col: number; char: Char | CharText }): TextSetStatus {
         // Bad mutation guards.

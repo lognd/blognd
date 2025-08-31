@@ -26,12 +26,12 @@ export interface Char {
     style?: CharStyle;
 }
 
-export interface TextView {
+/*export interface TextView {
     upper: number;
     lower: number;
     left: number;
     right: number;
-}
+}*/
 
 export type CharRow = Char[];
 export type CharCol = Char[];
@@ -57,8 +57,7 @@ export interface TextInterface {
     setLine(args: {row: number, charRow: CharRow}): TextSetStatus;
     writeString(args: {row: number, col: number, text: string, style?: CharStyle}): TextSetStatus;
 
-    // -- Resizing -----------------------------------------------------------------
-    setAspect(args: {width: number, height: number, minRowCount?: number, minColCount?: number}): void;
+    // setAspect(args: {width: number, height: number, minRowCount?: number, minColCount?: number}): void;
     fill(args: {char: Char}): void;
     fill(args: {char: CharText}): void;
     clear(): void;
