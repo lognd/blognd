@@ -39,6 +39,18 @@ export class MatrixRain
         this.color_map = Array.from({ length: args.rowCount }, () =>
             Array.from({ length: args.colCount }, () => 0)
         );
+
+        for (let y = this.text_buffer.getRowCount() - 1; y >= 0; y--) {
+            for (let x = this.text_buffer.getColCount() - 1; x >= 0; x--) {
+                if (pollRandom(MatrixRain.MATRIX_CHANCE))
+                {
+                    for (let o = 0; o < MATRIX_COLORS.length; o++) {
+                        if (y - o < 0) break;
+                        this.color_map[y-o][x] = MATRIX_COLORS.length - o as MatrixColorIndex;
+                    }
+                }
+            }
+        }
     }
 
     update(): void {
