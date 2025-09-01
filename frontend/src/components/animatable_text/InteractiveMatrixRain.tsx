@@ -32,13 +32,13 @@ export function InteractiveMatrixRain({ speed = 100, spawnAtCursor = true }: Int
     // Unified spawn handler
     function spawnDropAt(x: number, y: number) {
         if (!rainRef.current) return;
-        const col = Math.floor(x / charSize.width);
-        const row = Math.floor(y / charSize.height);
+        const col = Math.round(x / charSize.width);
+        const row = Math.round(y / charSize.height);
         if (col >= 0 && col < colCount) {
             if (spawnAtCursor) {
-                rainRef.current.spawnDrop({col: col, row: row, colorSelect: 1}); // blue drop at cursor row
+                rainRef.current.spawnDrop({col: col + 2, row: row, colorSelect: 1}); // blue drop at cursor row
             } else {
-                rainRef.current.spawnDrop({col: col, colorSelect: 1}); // blue drop from top
+                rainRef.current.spawnDrop({col: col + 2, colorSelect: 1}); // blue drop from top
             }
         }
     }
