@@ -8,7 +8,7 @@ interface MatrixRainProps {
     speed?: number;  // ms per frame
 }
 
-export function MatrixRain({ width, height, speed = 50 }: MatrixRainProps) {
+export function MatrixRain({ width, height, speed = 75 }: MatrixRainProps) {
     // Hold the backend instance
     const rainRef = useRef<MatrixRainBackend | null>(null);
 
@@ -31,7 +31,7 @@ export function MatrixRain({ width, height, speed = 50 }: MatrixRainProps) {
     if (!rainRef.current) return null;
 
     return (
-        <pre style={{ background: "black", color: "lime", margin: 0, padding: 0 }}>
+        <pre style={{ color: "lime", margin: 0, padding: 0 }}>
             <TextBuffer text={rainRef.current["text_buffer"]} />
         </pre>
     );

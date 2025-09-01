@@ -14,7 +14,7 @@ export default function App() {
                 padding: 0,
             }}
         >
-            <MatrixRain width={80} height={30} speed={50} />
+            <MatrixRain width={80} height={30} speed={75} />
         </div>
     );
 }

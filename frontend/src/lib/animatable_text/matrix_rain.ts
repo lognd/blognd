@@ -3,13 +3,18 @@ import { PRINTABLE_ASCII } from "./special_characters.ts"
 import type {Char, CharText, Color} from "./text_interface.ts";
 
 const MATRIX_COLORS: Color[] = [
-    "#9DE64E",
-    "#5AB552",
-    "#26854C",
+    "#1E4044",
+    "#1E4044",
+    "#1E4044",
+    "#1E4044",
     "#006554",
-    "#1E4044"
+    "#006554",
+    "#26854C",
+    "#26854C",
+    "#5AB552",
+    "#9DE64E",
 ]
-type MatrixColorIndex = 0 | 1 | 2 | 3 | 4 | 5;
+type MatrixColorIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 function sample<T>(arr: T[]): T {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -25,7 +30,7 @@ function randomASCII(): CharText {
 
 export class MatrixRain
 {
-    static readonly MATRIX_CHANCE: number = 0.1;
+    static readonly MATRIX_CHANCE: number = 0.04;
     private readonly text_buffer: TextBuffer;
     private readonly color_map: MatrixColorIndex[][];
 
@@ -42,8 +47,8 @@ export class MatrixRain
     }
 
     private updateTextBuffer(): void {
-        for (let y = this.text_buffer.getRowCount(); y >= 0; y--) {
-            for (let x = this.text_buffer.getColCount(); x >= 0; x--) {
+        for (let y = this.text_buffer.getRowCount() - 1; y >= 0; y--) {
+            for (let x = this.text_buffer.getColCount() - 1; x >= 0; x--) {
                 // Set text and color
                 switch (this.color_map[y][x]) {
                     case 0:
@@ -57,12 +62,12 @@ export class MatrixRain
     }
 
     private updateColorMap(): void {
-        for (let y = this.text_buffer.getRowCount(); y >= 0; y--) {
-            for (let x = this.text_buffer.getColCount(); x >= 0; x--) {
+        for (let y = this.text_buffer.getRowCount() - 1; y >= 0; y--) {
+            for (let x = this.text_buffer.getColCount() - 1; x >= 0; x--) {
                 // Move text down the screen.
                 const above_cell: Char | null = this.text_buffer.getChar({row: y - 1, col: x})
 
-                let color_index: number = 0;
+                let color_index: number = this.color_map[y][x];
                 if (above_cell) color_index = this.color_map[y-1][x] + 1;
 
                 // Decrement the text value.
