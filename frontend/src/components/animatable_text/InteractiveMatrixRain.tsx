@@ -8,11 +8,13 @@ interface InteractiveMatrixRainProps {
     spawnAtCursor?: boolean; // toggle behavior
 }
 
+
+
 export function InteractiveMatrixRain({ speed = 100, spawnAtCursor = true }: InteractiveMatrixRainProps) {
     const { width: windowWidth, height: windowHeight } = useWindowSize();
     const rainRef = useRef<MatrixRainBackend | null>(null);
     const [, forceRender] = useState({});
-    const [charSize, ] = useState({ width: 10, height: 18 });
+    const [charSize, ] = useState({ width: 14, height: 24 });
 
     const colCount = Math.round(windowWidth / charSize.width);
     const rowCount = Math.round(windowHeight / charSize.height);
@@ -36,9 +38,9 @@ export function InteractiveMatrixRain({ speed = 100, spawnAtCursor = true }: Int
         const row = Math.round(y / charSize.height);
         if (col >= 0 && col < colCount) {
             if (spawnAtCursor) {
-                rainRef.current.spawnDrop({col: col + 2, row: row, colorSelect: 1}); // blue drop at cursor row
+                rainRef.current.spawnDrop({col: col, row: row, colorSelect: 1}); // blue drop at cursor row
             } else {
-                rainRef.current.spawnDrop({col: col + 2, colorSelect: 1}); // blue drop from top
+                rainRef.current.spawnDrop({col: col, colorSelect: 1}); // blue drop from top
             }
         }
     }
