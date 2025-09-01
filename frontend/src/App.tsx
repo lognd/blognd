@@ -1,4 +1,4 @@
-import { MatrixRain } from "./components/animatable_text/MatrixRain";
+import { InteractiveMatrixRain } from "./components/animatable_text/InteractiveMatrixRain.tsx";
 
 export default function App() {
     return (
@@ -14,7 +14,7 @@ export default function App() {
                 padding: 0,
             }}
         >
-            <MatrixRain width={80} height={30} speed={75} />
+            <InteractiveMatrixRain speed={75} />
         </div>
     );
 }
